@@ -7,7 +7,9 @@ import 'package:flutter_practice_demo/model/item_bean.dart';
 class ItemListView extends StatelessWidget {
   final List<ItemBean> listData;
 
-  const ItemListView({required this.listData});
+  const ItemListView({
+    required this.listData,
+    required this.onSelectedMethod});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class ItemListView extends StatelessWidget {
 
   Widget itemBuilder(context, index) {
     return InkWell(
+      onTap: () => onSelectedMethod(listData[index]),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
@@ -70,5 +73,7 @@ class ItemListView extends StatelessWidget {
       ),
     );
   }
+
+  final Function(ItemBean itemBean) onSelectedMethod;
 
 }
