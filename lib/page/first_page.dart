@@ -11,6 +11,7 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage>
     with AutomaticKeepAliveClientMixin {
+  List<ItemBean> listData = MockData.getItemBeans();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _FirstPageState extends State<FirstPage>
     return Column(
       children: [
         Expanded(
-            child: ItemListView()
+            child: ItemListView(listData: listData,)
         )
       ],
     );

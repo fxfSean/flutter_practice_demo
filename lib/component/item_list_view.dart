@@ -3,15 +3,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_demo/model/item_bean.dart';
-import 'package:flutter_practice_demo/model/mock_data.dart';
 
-class ItemListView extends StatefulWidget {
-  @override
-  _ItemListViewState createState() => _ItemListViewState();
-}
+class ItemListView extends StatelessWidget {
+  final List<ItemBean> listData;
 
-class _ItemListViewState extends State<ItemListView> {
-  List<ItemBean> listData = MockData.getItemBeans();
+  const ItemListView({required this.listData});
 
   @override
   Widget build(BuildContext context) {
