@@ -16,11 +16,28 @@ class SelectedAssetsListView extends StatelessWidget {
       : super(key: key);
 
   Widget _selectedItemWidget(int index) {
-    return GestureDetector(
-      onTap: () => removeData(selectedBeans[index]),
-      child: Container(
-        color: Colors.blue,
-      ),
+    return ValueListenableBuilder(
+      valueListenable: disPlayingDetail,
+      builder: (_, bool value, __) {
+        return  GestureDetector(
+          onTap: () => removeData(selectedBeans[index]),
+          child: Container(
+            color: Colors.blue,
+            child: Center(
+                child: AnimatedDefaultTextStyle(
+                  duration: kThemeAnimationDuration,
+                  style: TextStyle(fontSize: value ? 10: 5,color: Colors.white),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:[
+                    Text(selectedBeans[index].title,),
+                    SizedBox(height: value ? 12: 5,),
+                    Text(selectedBeans[index].icon,)
+                  ],),
+                )),
+          ),
+        );
+      },
     );
   }
 
@@ -57,12 +74,7 @@ class SelectedAssetsListView extends StatelessWidget {
               return Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: Stack(
-                    children: [
-                      _selectedItemWidget(index),
-
-                    ]
-                  ),
+                  child: _selectedItemWidget(index),
                 ),
               );
             })),
