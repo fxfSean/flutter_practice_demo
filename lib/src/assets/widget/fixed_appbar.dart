@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class FixedAppBar extends StatelessWidget {
   final List<Widget>? actions;
+  final Widget? title;
 
-  const FixedAppBar({Key? key, this.actions}) : super(key: key);
+  const FixedAppBar({Key? key, this.actions, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class FixedAppBar extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: DefaultTextStyle(
                   style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 23),
-                  child: Text('title'),
+                  child: title!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   softWrap: false,

@@ -63,9 +63,38 @@ class AssetsPicker extends StatelessWidget {
   Widget appbar(BuildContext context) {
     return FixedAppBarWrapper(
         appBar: FixedAppBar(
+          title: pathEntrySelector(context),
           actions: confirmButton(context),
         ),
         body: Container());
+  }
+
+  Widget pathEntrySelector(BuildContext context) {
+    return UnconstrainedBox(
+      child: Container(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.5
+        ),
+        height: 32,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(999),
+          color: theme.dividerColor
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Pictures', style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.normal,
+            ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Icon(Icons.keyboard_arrow_down)
+          ],
+        ),
+      ),
+    );
   }
 
   ValueNotifier<bool> _selectListenable = ValueNotifier(false);
