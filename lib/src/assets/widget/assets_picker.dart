@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_practice_demo/src/assets/widget/fixed_appbar.dart';
@@ -67,26 +68,35 @@ class AssetsPicker extends StatelessWidget {
         body: Container());
   }
 
-  bool isSelectedNotEmpty = false;
+  ValueNotifier<bool> _selectListenable = ValueNotifier(false);
 
   List<Widget> confirmButton(BuildContext context) {
-    return [MaterialButton(
-        minWidth: 20,
-        padding: EdgeInsets.symmetric(horizontal: 12),
-        color: theme.dividerColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(3)
-        ),
-        child: Text(isSelectedNotEmpty
-            ? '${Constants.textDelegate.confirm}' '(1/2)'
-            : '${Constants.textDelegate.confirm}', style: TextStyle(
+    return [ValueListenableBuilder(
+      valueListenable: _selectListenable,
+      builder: (BuildContext context,bool value, Widget? child) {
+        return  MaterialButton(
+          minWidth: 20,
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          color: value ? themeColor : theme.dividerColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(3)
+          ),
+          child: Text(value
+          ? '${Constants.textDelegate.confirm}' '(1/2)'
+              : '${Constants.textDelegate.confirm}', style: TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.normal,
-          color: theme.textTheme.caption?.color
-        ),),
-        onPressed: () {
-          isSelectedNotEmpty = !isSelectedNotEmpty;
-    })];
+          color: value
+          ? theme.textTheme.bodyText1?.color
+              : theme.textTheme.caption?.color,
+          ),),
+          onPressed: () {
+          _selectListenable.value = !_selectListenable.value;
+        },
+    );
+
+      }
+    )];
   }
 
   Widget androidLayout(BuildContext context) {
