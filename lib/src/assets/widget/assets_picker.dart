@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_practice_demo/src/assets/widget/fixed_appbar.dart';
+import 'package:flutter_practice_demo/src/constants/constants.dart';
 
 class AssetsPicker extends StatelessWidget {
   final Color themeColor;
@@ -10,7 +11,7 @@ class AssetsPicker extends StatelessWidget {
 
   ThemeData get theme => AssetsPicker.themeData(themeColor);
 
-  const AssetsPicker({Key? key, Color? themeColor})
+  AssetsPicker({Key? key, Color? themeColor})
       : assert(themeColor == null),
         themeColor = themeColor ?? const Color(0xff00bc56), super(key: key);
 
@@ -66,6 +67,8 @@ class AssetsPicker extends StatelessWidget {
         body: Container());
   }
 
+  bool isSelectedNotEmpty = false;
+
   List<Widget> confirmButton(BuildContext context) {
     return [MaterialButton(
         minWidth: 20,
@@ -74,12 +77,15 @@ class AssetsPicker extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(3)
         ),
-        child: Text('确认', style: TextStyle(
+        child: Text(isSelectedNotEmpty
+            ? '${Constants.textDelegate.confirm}' '(1/2)'
+            : '${Constants.textDelegate.confirm}', style: TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.normal,
           color: theme.textTheme.caption?.color
         ),),
         onPressed: () {
+          isSelectedNotEmpty = !isSelectedNotEmpty;
     })];
   }
 
