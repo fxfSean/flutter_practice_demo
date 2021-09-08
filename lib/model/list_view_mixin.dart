@@ -1,8 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_practice_demo/component/item_list_view.dart';
 import 'package:flutter_practice_demo/component/selected_assets_listview.dart';
 import 'package:flutter_practice_demo/model/item_bean.dart';
+import 'package:flutter_practice_demo/src/assets/widget/assets_picker.dart';
 
 mixin ListViewMixin<T extends StatefulWidget> on State<T> {
   List<ItemBean> get listData;
@@ -10,6 +12,7 @@ mixin ListViewMixin<T extends StatefulWidget> on State<T> {
   final ValueNotifier<bool> disPlayingDetail = ValueNotifier(true);
 
   void selectItem(ItemBean itemBean) {
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => AssetsPicker()));
     print('Click item: ${itemBean.title}');
     if (!selectedData.contains(itemBean)){
       selectedData.add(itemBean);
