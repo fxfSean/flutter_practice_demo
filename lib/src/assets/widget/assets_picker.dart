@@ -72,6 +72,7 @@ class AssetsPicker extends StatelessWidget {
   Widget pathEntrySelector(BuildContext context) {
     return UnconstrainedBox(
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.5
         ),
@@ -83,14 +84,23 @@ class AssetsPicker extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Pictures', style: TextStyle(
+            Text('Recent', style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.normal,
             ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            Icon(Icons.keyboard_arrow_down)
+            Padding(
+              padding: EdgeInsetsDirectional.only(start: 5),
+              child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: theme.iconTheme.color!.withOpacity(0.5)
+                  ),
+                  child: Icon(Icons.keyboard_arrow_down,size: 20,
+                    color: theme.colorScheme.primary,)),
+            )
           ],
         ),
       ),
