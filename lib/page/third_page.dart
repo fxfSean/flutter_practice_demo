@@ -3,11 +3,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_demo/page/return_value_page.dart';
+import 'package:flutter_practice_demo/page/test/global_key_err.dart';
 
 class ThirdPage extends StatefulWidget {
   @override
   _ThirdPageState createState() => _ThirdPageState();
 }
+
+GlobalKey<GlobalKeyErrPageState> _globalKey = GlobalKey();
 
 class _ThirdPageState extends State<ThirdPage> {
   var backValue;
@@ -19,10 +22,7 @@ class _ThirdPageState extends State<ThirdPage> {
         child: TextButton(
           child: Text('Third ${backValue ?? ""}'),
           onPressed: () async {
-              backValue = await Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ReturnValuePage()));
-              setState(() {
-
-              });
+              await Navigator.of(context).push(MaterialPageRoute(builder: (_)=> GlobalKeyErrPage(key: _globalKey,)));
           },
         ),
       ),
